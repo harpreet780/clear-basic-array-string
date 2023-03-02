@@ -18,14 +18,36 @@ const ComplexStrings = () => {
       if (str.slice(i) !== step.reverse().join('')) {
         makePalindrome.push(str[i])
         palindromeResult = str + makePalindrome.join("");
-        setUserDetail({ show: palindromeResult })
+        setUserDetail({ ...userDetail, show: palindromeResult })
       }
     }
   }
+
+  const addPersisteneceApproach1 = (num) => {
+    let times = 0;
+    num = num.toString();
+    while (num.length > 1) {
+      times++;
+      num = num.split('').map(Number).reduce((a, b) => a + b).toString();
+    }
+    setUserDetail({ ...userDetail, show: times })
+    return times;
+  }
+  const multiPersisteneceApproach1 = (num) => {
+    let times = 0;
+    num = num.toString();
+    while (num.length > 1) {
+      times++;
+      num = num.split('').map(Number).reduce((a, b) => a * b).toString();
+    }
+    setUserDetail({ ...userDetail, show: times })
+    return times;
+  }
+
   // object of all entries having unique marks
   const getUniqueValues = {
-    0: { age: 18, name: 'john', marks: '400' },
-    1: { age: 17, name: 'julie', marks: '400' },
+    0: { age: 17, name: 'john', marks: '400' },
+    1: { age: 18, name: 'julie', marks: '400' },
     2: { age: 16, name: 'Robin', marks: '200' },
     3: { age: 16, name: 'Bella', marks: '300' },
     4: { age: 16, name: 'john', marks: '250' },
@@ -34,38 +56,47 @@ const ComplexStrings = () => {
   let filtered = Object.values(getUniqueValues);
   //1st method
   const uniqueValues = filtered.reduce((accumulator, currentValue) => {
-    if (!accumulator.find((item) => item.marks === currentValue.marks)) {
+    if (!accumulator.find((item) => item.marks === currentValue.marks && item.age > currentValue.age)) {
+      // console.log("FDFDFDF == ", currentValue)
       accumulator.push(currentValue);
     }
     return accumulator;
   }, []);
   // 2nd method for object of all entries having unique marks
-  // const AllUniqueValues = [...new Map(filtered.map(items => [items.marks, items])).values()]
-  // console.log(AllUniqueValues,"AllUniqueValues")
+  const AllUniqueValues = [...new Map(filtered.map(items => [items.marks, items])).values()]
+  // console.log(AllUniqueValues, "AllUniqueValues")
 
   // 3rd Method for object of all entries having unique marks
   const uniqueRecord = filtered.filter((item, index, self) => index === self.findIndex((t) => (t.marks === item.marks)))
-  console.log(uniqueRecord,"unique record")
+  // console.log(uniqueRecord, "unique record")
 
   // First Recurrence Index
   let str = "scissors";
   let indices = [];
   for (let i = 0; i < str.length; i++) {
-    if (str[i] === "s") {
+    if (str.charAt(i) == str[i]) {
       indices.push(i);
     }
+
   }
+  console.log(indices, "uyduh")
+  // for (let i = 0; i < str.length; i++) {
+  //   if (str[i] === "s") {
+  //     indices.push(i);
+  //   }
+  // }
   // recursion objects compare
-  let obj1 = ["cars", "trains", ["roads", ["railways"]]]
-  let obj2 = ["cars", "trains", ["roads", ["railways"]]]
-  let recursionResult = JSON.stringify(obj1) === JSON.stringify(obj2);
+  let recursionStr = ["cars", "trains", ["roads", ["railways"]]]
+  let recursionMatchStr = ["cars", "trains", ["roads", ["railways"]]]
+  let recursionResult = JSON.stringify(recursionStr) === JSON.stringify(recursionMatchStr);
 
   //Deep Arithmetic
-  const stringSum = ["1", "five", "2wenty", "thr33"];
-  let sum = stringSum.map((a) => +a.match(/\d+/g)).reduce((a, b) => a + b)
-  console.log(sum, "sum")
-  const strArthmetic = [["1X2", "t3n"], ["1024", "5", "64"]];
-  
+  const strArthmetic = [[["1"], "10v3"], ["738h"], [["s0"], ["1mu4ch3"], "-1s0"]];
+  // var merged = [].concat.apply([], arrays);
+  // var s = "[" + JSON.stringify(strArthmetic).replace(/\[|]/g,'') +"]";
+  let flattened = strArthmetic.flat(Infinity);
+  let flattenedSum = flattened.toString().match(/-?\d+/g).map(Number);
+  const count = flattenedSum.reduce((acc, value) => acc + value)
 
   return (
     <div>
@@ -76,19 +107,30 @@ const ComplexStrings = () => {
         Given an incomplete palindrome as a string, return the minimum
         letters needed to be added on to the end to make the string a palindrome.
       </p>
-      <div className='w-50 m-auto'>
-        <input type="text" className=' mb-3' name="text" value={userDetail.userField} onChange={(e) => setUserDetail({
+      <div className='w-50 m-auto d-flex'>
+        <input type="text" className='w-50' name="text" value={userDetail.userField} onChange={(e) => setUserDetail({
           ...userDetail, show: e.target.value
         })} />
-        <div className='d-flex justify-content-around'>
-          <button onClick={() => makePalindromeApproach1(userDetail.show)} className="optionBtn m-auto">Palindrome Approach 1</button>
-          <button onClick={() => handlePalindromeApproach2(userDetail.show)} className="optionBtn m-auto">Palindrome Approach 2</button>
+        <div className='d-flex w-50'>
+          <button onClick={() => makePalindromeApproach1(userDetail.show)} className="submitBtn p-3">Palindrome Approach 1</button>
+          <button onClick={() => handlePalindromeApproach2(userDetail.show)} className="submitBtn p-3">Palindrome Approach 2</button>
         </div>
-        <p>{JSON.stringify(userDetail.show)}</p>
       </div>
+      <p>{JSON.stringify(userDetail.show)}</p>
+      <p>Additive Persistence and Multiplicative Persistence Iteration upto a single digit Integer.</p>
+      <div className='w-50 m-auto d-flex align-items-center mb-4'>
+        <input type="text" name="text" className='w-50' value={userDetail.userField} onChange={(e) => setUserDetail({
+          ...userDetail, show: e.target.value
+        })} />
+        <div className='w-50 d-flex'>
+          <button onClick={() => addPersisteneceApproach1(userDetail.show)} className="optionBtn">Add Persistenece</button>
+          <button onClick={() => multiPersisteneceApproach1(userDetail.show)} className="optionBtn">Multiple Persistenece</button>
+        </div>
+      </div>
+      <p>{JSON.stringify(userDetail.show)}</p>
       <p>
-        ["1", "five", "2wenty", "thr33"] :
-        <b>Ans--- {JSON.stringify(sum)}</b>
+        [[["1"], "10v3"], ["738h"], [["s0"], ["1mu4ch3"], "-1s0"]]
+        <b>Ans--- {JSON.stringify(count)}</b>
       </p>
       <p className="m-0 text-decoration-underline mt-4">
         First Recurrence Index
