@@ -54,32 +54,49 @@ const ComplexStrings = () => {
     5: { age: 15, name: 'julie', marks: '250' }
   }
   let filtered = Object.values(getUniqueValues);
+  let filterAge = filtered.sort((a, b) => b.age - a.age);
   //1st method
-  const uniqueValues = filtered.reduce((accumulator, currentValue) => {
-    if (!accumulator.find((item) => item.marks === currentValue.marks && item.age > currentValue.age)) {
-      // console.log("FDFDFDF == ", currentValue)
+  const uniqueValues = filterAge.reduce((accumulator, currentValue) => {
+    if (!accumulator.find((item) => item.marks === currentValue.marks)) {
       accumulator.push(currentValue);
     }
     return accumulator;
   }, []);
-  // 2nd method for object of all entries having unique marks
-  const AllUniqueValues = [...new Map(filtered.map(items => [items.marks, items])).values()]
-  // console.log(AllUniqueValues, "AllUniqueValues")
+  console.log(uniqueValues,"accccccccccc")
 
-  // 3rd Method for object of all entries having unique marks
-  const uniqueRecord = filtered.filter((item, index, self) => index === self.findIndex((t) => (t.marks === item.marks)))
-  // console.log(uniqueRecord, "unique record")
+  // 2rd Method for object of all entries having unique marks
+  const uniqueRecord = filterAge.filter((item, index, self) => index === self.findIndex((t) => (t.marks === item.marks)));
+  console.log(uniqueRecord, "unique record")
 
   // First Recurrence Index
-  let str = "scissors";
-  let indices = [];
-  for (let i = 0; i < str.length; i++) {
-    if (str.charAt(i) == str[i]) {
-      indices.push(i);
+  const RecurrenceIndex = (str = "YZTTZMNERXE") => {
+   const indices = {};
+    for (let i = 0; i < str.length; i++) {
+      if (indices[str[i]] !== undefined) {
+        return { [str[i]]: [indices[str[i]], i] };
+      }
+      indices[str[i]] = i;
     }
-
+    return null;
   }
-  console.log(indices, "uyduh")
+  // second method Recurrence Index
+let str="DCFRUF"
+  let findChar;
+  let findIndex={};
+  for (let i = 0; i < str.length; i++) {
+    if (findIndex[str[i]] ) {
+      return findChar = str[i];
+    }
+    else {
+      findChar = {[str[i]]: [findIndex[str[i]], i]}
+    }
+  }
+  // console.log(findChar, "indi")
+// console.log(findFirstRepeatedChar("DCFRUF"));
+
+
+  // let str = "scissors";
+  // let indices = [];
   // for (let i = 0; i < str.length; i++) {
   //   if (str[i] === "s") {
   //     indices.push(i);
@@ -108,7 +125,7 @@ const ComplexStrings = () => {
         letters needed to be added on to the end to make the string a palindrome.
       </p>
       <div className='w-50 m-auto d-flex'>
-        <input type="text" className='w-50' name="text" value={userDetail.userField} onChange={(e) => setUserDetail({
+        <input type="text" className='w-50' name="text" value={userDetail.show} onChange={(e) => setUserDetail({
           ...userDetail, show: e.target.value
         })} />
         <div className='d-flex w-50'>
@@ -119,7 +136,7 @@ const ComplexStrings = () => {
       <p>{JSON.stringify(userDetail.show)}</p>
       <p>Additive Persistence and Multiplicative Persistence Iteration upto a single digit Integer.</p>
       <div className='w-50 m-auto d-flex align-items-center mb-4'>
-        <input type="text" name="text" className='w-50' value={userDetail.userField} onChange={(e) => setUserDetail({
+        <input type="text" name="text" className='w-50' placeholder="Enter only numbers" value={userDetail.show} onChange={(e) => setUserDetail({
           ...userDetail, show: e.target.value
         })} />
         <div className='w-50 d-flex'>
@@ -135,7 +152,7 @@ const ComplexStrings = () => {
       <p className="m-0 text-decoration-underline mt-4">
         First Recurrence Index
       </p>
-      <p>scissors: {JSON.stringify(indices)}</p>
+      <p>YZTTZMNERXE: {JSON.stringify(RecurrenceIndex("YZTTZMNERXE"))}</p>
       <p className="text-center mb-4">
         Match two objects string --isSimilar(["cars", "trains", ["roads", ["railways"]]], ["cars", "trains", ["roads", ["railways"]]]):
         <b>{JSON.stringify(recursionResult)}</b>
