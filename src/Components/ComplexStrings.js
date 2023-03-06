@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 
 const ComplexStrings = () => {
   const [userDetail, setUserDetail] = useState({
-    show: ""
+    show: "",
+    stringsToAdd: "",
   });
   // make palindrome
   const makePalindromeApproach1 = (str = "") => {
-    let result = str + str.split("").reverse().join("").slice(1);
-    setUserDetail({ show: result })
+    let copyPalindrome = str.split("").reverse().join("").slice(1);
+    let result = str + copyPalindrome;
+    setUserDetail({ show: result, stringsToAdd: copyPalindrome })
   }
   // 2nd method for make palindrome
   const handlePalindromeApproach2 = (str = "") => {
@@ -33,6 +35,7 @@ const ComplexStrings = () => {
     setUserDetail({ ...userDetail, show: times })
     return times;
   }
+
   const multiPersisteneceApproach1 = (num) => {
     let times = 0;
     num = num.toString();
@@ -62,15 +65,14 @@ const ComplexStrings = () => {
     }
     return accumulator;
   }, []);
-  console.log(uniqueValues,"accccccccccc")
 
   // 2rd Method for object of all entries having unique marks
   const uniqueRecord = filterAge.filter((item, index, self) => index === self.findIndex((t) => (t.marks === item.marks)));
-  console.log(uniqueRecord, "unique record")
+  // console.log(uniqueRecord, "unique record")
 
   // First Recurrence Index
   const RecurrenceIndex = (str = "YZTTZMNERXE") => {
-   const indices = {};
+    const indices = {};
     for (let i = 0; i < str.length; i++) {
       if (indices[str[i]] !== undefined) {
         return { [str[i]]: [indices[str[i]], i] };
@@ -80,19 +82,19 @@ const ComplexStrings = () => {
     return null;
   }
   // second method Recurrence Index
-let str="DCFRUF"
+  let str = "DCFRUF"
   let findChar;
-  let findIndex={};
+  let findIndex = {};
   for (let i = 0; i < str.length; i++) {
-    if (findIndex[str[i]] ) {
+    if (findIndex[str[i]]) {
       return findChar = str[i];
     }
     else {
-      findChar = {[str[i]]: [findIndex[str[i]], i]}
+      findChar = { [str[i]]: [findIndex[str[i]], i] }
     }
   }
   // console.log(findChar, "indi")
-// console.log(findFirstRepeatedChar("DCFRUF"));
+  // console.log(findFirstRepeatedChar("DCFRUF"));
 
 
   // let str = "scissors";
@@ -106,14 +108,17 @@ let str="DCFRUF"
   let recursionStr = ["cars", "trains", ["roads", ["railways"]]]
   let recursionMatchStr = ["cars", "trains", ["roads", ["railways"]]]
   let recursionResult = JSON.stringify(recursionStr) === JSON.stringify(recursionMatchStr);
-
+  
   //Deep Arithmetic
-  const strArthmetic = [[["1"], "10v3"], ["738h"], [["s0"], ["1mu4ch3"], "-1s0"]];
+  const strArthmetic = [[["1"], "10v3"], [["s0"], ["1mu4ch3  2 "], "-6s0"]];
   // var merged = [].concat.apply([], arrays);
   // var s = "[" + JSON.stringify(strArthmetic).replace(/\[|]/g,'') +"]";
   let flattened = strArthmetic.flat(Infinity);
-  let flattenedSum = flattened.toString().match(/-?\d+/g).map(Number);
-  const count = flattenedSum.reduce((acc, value) => acc + value)
+  const trimArray = flattened.map(element => {
+    return element.split(" ").join("");
+  });
+  let flattenedSum = trimArray.toString().match(/-?\d+/g).map(Number);
+  const count = flattenedSum.reduce((acc, value) => acc + value);
 
   return (
     <div>
@@ -125,15 +130,26 @@ let str="DCFRUF"
         letters needed to be added on to the end to make the string a palindrome.
       </p>
       <div className='w-50 m-auto d-flex'>
-        <input type="text" className='w-50' name="text" value={userDetail.show} onChange={(e) => setUserDetail({
-          ...userDetail, show: e.target.value
-        })} />
+        <input type="text" className='w-50' name="text" value={userDetail.show} onChange={(e) => setUserDetail({ ...userDetail, show: e.target.value })} />
         <div className='d-flex w-50'>
           <button onClick={() => makePalindromeApproach1(userDetail.show)} className="submitBtn p-3">Palindrome Approach 1</button>
           <button onClick={() => handlePalindromeApproach2(userDetail.show)} className="submitBtn p-3">Palindrome Approach 2</button>
         </div>
       </div>
-      <p>{JSON.stringify(userDetail.show)}</p>
+      <table className='table w-50 mt-4 m-auto mb-4'>
+        <thead>
+          <th className='text-center'>word-add for make palindrome</th>
+          <th className='text-center'>length</th>
+          <th className='text-center'>final String</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{userDetail.stringsToAdd}</td>
+            <td>{userDetail.stringsToAdd.length}</td>
+            <td>{userDetail.show}</td>
+          </tr>
+        </tbody>
+      </table>
       <p>Additive Persistence and Multiplicative Persistence Iteration upto a single digit Integer.</p>
       <div className='w-50 m-auto d-flex align-items-center mb-4'>
         <input type="text" name="text" className='w-50' placeholder="Enter only numbers" value={userDetail.show} onChange={(e) => setUserDetail({
@@ -146,8 +162,8 @@ let str="DCFRUF"
       </div>
       <p>{JSON.stringify(userDetail.show)}</p>
       <p>
-        [[["1"], "10v3"], ["738h"], [["s0"], ["1mu4ch3"], "-1s0"]]
-        <b>Ans--- {JSON.stringify(count)}</b>
+        {strArthmetic}
+        <b>  Ans--- {JSON.stringify(count)}</b>
       </p>
       <p className="m-0 text-decoration-underline mt-4">
         First Recurrence Index
