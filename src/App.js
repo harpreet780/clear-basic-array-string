@@ -25,7 +25,7 @@ function App() {
           <StringWithFunction />
         </div>
       </div> */}
-
+<StringWithoutFunction />
       {/* <ImplementArrayFunctions/> */}
       <ComplexStrings/>
     </div>

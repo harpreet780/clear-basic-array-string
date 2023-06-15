@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 const ComplexStrings = () => {
+  const [showPalindromeTable , setShowPalindromeTable] = useState(false);
   const [userDetail, setUserDetail] = useState({
     show: "",
     stringsToAdd: "",
@@ -9,6 +10,7 @@ const ComplexStrings = () => {
   const makePalindromeApproach1 = (str = "") => {
     let copyPalindrome = str.split("").reverse().join("").slice(1);
     let result = str + copyPalindrome;
+    setShowPalindromeTable(true);
     setUserDetail({ show: result, stringsToAdd: copyPalindrome })
   }
   // 2nd method for make palindrome
@@ -20,6 +22,7 @@ const ComplexStrings = () => {
       if (str.slice(i) !== step.reverse().join('')) {
         makePalindrome.push(str[i])
         palindromeResult = str + makePalindrome.join("");
+        setShowPalindromeTable(true);
         setUserDetail({ ...userDetail, show: palindromeResult })
       }
     }
@@ -136,6 +139,7 @@ const ComplexStrings = () => {
           <button onClick={() => handlePalindromeApproach2(userDetail.show)} className="submitBtn p-3">Palindrome Approach 2</button>
         </div>
       </div>
+      {showPalindromeTable && 
       <table className='table w-50 mt-4 m-auto mb-4'>
         <thead>
           <th className='text-center'>word-add for make palindrome</th>
@@ -150,7 +154,8 @@ const ComplexStrings = () => {
           </tr>
         </tbody>
       </table>
-      <p>Additive Persistence and Multiplicative Persistence Iteration upto a single digit Integer.</p>
+      }
+      <p className='mt-4'>Additive Persistence and Multiplicative Persistence Iteration upto a single digit Integer.</p>
       <div className='w-50 m-auto d-flex align-items-center mb-4'>
         <input type="text" name="text" className='w-50' placeholder="Enter only numbers" value={userDetail.show} onChange={(e) => setUserDetail({
           ...userDetail, show: e.target.value
