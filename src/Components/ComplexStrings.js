@@ -165,7 +165,13 @@ const ComplexStrings = () => {
         boolean='odd'
     }
     // console.log(boolean,'boolean')
-  
+    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const findEven= arr.filter((num)=> {
+       // num%2 === 0 (if even)
+        return num%3===0
+    })
+    console.log(findEven)  
+
   return (
     <div>
       <h3 className='text-center text-decoration-underline'>
