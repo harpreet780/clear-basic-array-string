@@ -170,8 +170,15 @@ const ComplexStrings = () => {
        // num%2 === 0 (if even)
         return num%2 !==0
     })
-    console.log(findEven)  
-
+    console.log(findEven) 
+let array = [1, 2, 3, 4, 5, 6, 7, 8, 9];  
+const even = [];
+  array.forEach(number => {
+    if (number % 2 === 0) {
+      even.push(number);
+    }
+  });
+  
   return (
     <div>
       <h3 className='text-center text-decoration-underline'>
