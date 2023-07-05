@@ -168,7 +168,7 @@ const ComplexStrings = () => {
     let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     const findEven= arr.filter((num)=> {
        // num%2 === 0 (if even)
-        return num%3===0
+        return num%2 !==0
     })
     console.log(findEven)  
 
