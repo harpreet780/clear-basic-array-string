@@ -68,6 +68,7 @@ const StringWithoutFunction = () => {
             }
         }
     }
+    
      // sorting without using array sort as ascending
      let arrD = ["ValA", "ValB", "ValC", "ValD", "ValT", "ValG", "ValH", "ValF"];
      let desc=[]
