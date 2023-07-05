@@ -120,6 +120,52 @@ const ComplexStrings = () => {
   let flattenedSum = trimArray.toString().match(/-?\d+/g).map(Number);
   const count = flattenedSum.reduce((acc, value) => acc + value);
 
+  // sorting without using array sort as ascending
+    let arr = ["ValA", "ValB", "ValC", "ValD", "ValT", "ValG", "ValH", "ValF"];
+    let temp=[]
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[i]) {
+                temp = arr[j]
+                arr[j]=arr[i]
+                arr[i] = temp
+            }
+        }
+    }
+    
+     // sorting without using array sort as ascending
+     let arrD = ["ValA", "ValB", "ValC", "ValD", "ValT", "ValG", "ValH", "ValF"];
+     let desc=[]
+     for (let i = 0; i < arr.length; i++) {
+         for (let j = i + 1; j < arr.length; j++) {
+             if (arr[j] > arr[i]) {
+                 desc = arrD[j]
+                 arrD[j]=arrD[i]
+                 arrD[i] = desc
+             }
+         }
+     }
+    // console.log(arrD,"arrD sort")
+
+    // print Table
+    let num = 3;
+    let res;
+    for (let i = 1; i <= 10; i++) {
+        res = i * num
+        // console.log(`${num} * ${i} = ${res}`, "table");
+    }
+
+    // Return a Boolean if a number is divisible by 10
+    var x = 20;
+    let boolean;
+    if (x % 10 == 0) {
+        boolean='even'
+    }
+    else {
+        boolean='odd'
+    }
+    // console.log(boolean,'boolean')
+  
   return (
     <div>
       <h3 className='text-center text-decoration-underline'>
