@@ -49,7 +49,6 @@ const ComplexStrings = () => {
     setUserDetail({ ...userDetail, show: times })
     return times;
   }
-
   // object of all entries having unique marks
   const getUniqueValues = {
     0: { age: 17, name: 'john', marks: '400' },
@@ -59,6 +58,7 @@ const ComplexStrings = () => {
     4: { age: 16, name: 'john', marks: '250' },
     5: { age: 15, name: 'julie', marks: '250' }
   }
+  
   let filtered = Object.values(getUniqueValues);
   let filterAge = filtered.sort((a, b) => b.age - a.age);
   //1st method
