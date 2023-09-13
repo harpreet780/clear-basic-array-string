@@ -84,11 +84,11 @@ const StringWithFunction = () => {
     }
     // Check for Anagrams
     const checkAnagrams = (item1 = "", item2 = "") => {
-        let value1 = item1;
-        let value2 = item2;
+        let value1 = item1.toLowerCase()
+        let value2 = item2.toLowerCase();
         let str1 = value1.split('').sort().join('');
         let str2 = value2.split('').sort().join('');
-        let anagramResult = "";
+        let anagramResult;
         if (str1 === str2) {
             anagramResult = "true"
         } else {
