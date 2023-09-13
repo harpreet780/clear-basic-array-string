@@ -97,6 +97,22 @@ const StringWithFunction = () => {
         setUserDetail({ ...userDetail, userDetail: anagramResult, anagramField: anagramResult })
         console.log(anagramResult, "anagramResult")
     }
+    var firstWord = "Mary";
+    var secondWord = "Army";
+
+    isAnagram(firstWord, secondWord); // true
+
+    function isAnagram(first, second) {
+        // For case insensitivity, change both words to lowercase.
+        var a = first.toLowerCase();
+        var b = second.toLowerCase();
+
+        // Sort the strings, and join the resulting array to a string. Compare the results
+        a = a.split("").sort().join("");
+        b = b.split("").sort().join("");
+
+        return a === b;
+    }
     // duplicate letters
     const removeDuplicateLetters = (letters = "") => {
         let clearDuplicateitem = letters;
@@ -143,7 +159,7 @@ const StringWithFunction = () => {
         //      // num = cht;
         //    }
         //   }
-        
+
         // let s = "0a2kd6ft001g568gft";
         // let result = "";
         // let currentNum = "";
@@ -176,7 +192,7 @@ const StringWithFunction = () => {
         //   return (
         //     {
         //     }
-            
+
         //     )
         // })
     }
